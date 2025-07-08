@@ -3,6 +3,7 @@ import HomeLayout from "../../Layouts/HomeLayouts/HomeLayout";
 import Home from "../../pages/Home/Home";
 import SignupForm from "../../AuthPages/SignUp";
 import SigninPage from "../../AuthPages/SignIn";
+import AuthLayout from "../../Layouts/AuthLayout/AuthLayout";
 
 const router = createBrowserRouter([
     {
@@ -13,13 +14,19 @@ const router = createBrowserRouter([
                 index: true,
                 Component: Home
             },
-            {
-                path: 'sign-up',
-                Component: SignupForm
-            },
+        ]
+    },
+    {
+        path: '/',
+        Component: AuthLayout,
+        children: [
             {
                 path: 'sign-in',
                 Component: SigninPage
+            },
+            {
+                path: 'sign-up',
+                Component: SignupForm
             }
         ]
     }

@@ -8,6 +8,9 @@ import {
   Toast,
 } from "flowbite-react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link } from "react-router";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 export default function SignupPage() {
   const {
@@ -27,8 +30,13 @@ export default function SignupPage() {
     <div className="min-h-screen w-full flex items-center justify-center bg-animated-gradient">
       <div className="flex flex-col md:flex-row w-full max-w-6xl shadow-xl bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20">
         {/* Left: Signup Form */}
-        <div className="w-full md:w-1/2 p-8 bg-white/30">
-          <h2 className="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-600">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full md:w-1/2 p-8 bg-white/30"
+        >
+          <h2 className="text-3xl font-bold text-center mb-6 text-white">
             Sign Up
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -83,7 +91,7 @@ export default function SignupPage() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="input-gradient pr-10"
+                  className="input-gradient"
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -94,7 +102,7 @@ export default function SignupPage() {
                 />
                 <span
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-2.5 text-xl text-gray-500 cursor-pointer"
+                  className="absolute right-5 top-2.5 text-xl text-gray-500 cursor-pointer"
                 >
                   {showPassword ? <HiEyeOff /> : <HiEye />}
                 </span>
@@ -124,10 +132,16 @@ export default function SignupPage() {
             )}
 
             {/* Submit */}
-            <Button type="submit" gradientDuoTone="greenToBlue" fullSized>
+            <Button className="w-full bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl focus:ring-green-200 dark:focus:ring-green-800">
               Sign Up
             </Button>
           </form>
+          <p>Already have an account? then <Link to={'/sign-in'} className="underline text-blue-600">Sign In</Link> </p>
+          <div className="divider">OR</div>
+          <button className="btn w-full text-black border-[#e5e5e5]">
+            <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
+            Sign up with Google
+          </button>
 
           {/* Success Toast */}
           {submittedData && (
@@ -137,10 +151,15 @@ export default function SignupPage() {
               </div>
             </Toast>
           )}
-        </div>
+        </motion.div>
 
         {/* Right: Content */}
-        <div className="hidden md:flex w-full md:w-1/2 bg-transparent items-center justify-center p-10">
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex md:flex-row w-full md:w-1/2 bg-transparent items-center justify-center p-10"
+        >
           <div className="text-white text-center space-y-4">
             <h1 className="text-4xl font-bold leading-tight">
               Join the community
@@ -149,7 +168,7 @@ export default function SignupPage() {
               Build your dream, manage your data, and grow with us. Sign up today and experience modern design with smooth UI.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Custom CSS */}
@@ -188,6 +207,6 @@ export default function SignupPage() {
         }
       `}
       </style>
-    </div>
+    </div >
   );
 }
