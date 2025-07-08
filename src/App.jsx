@@ -1,11 +1,11 @@
+import { Button } from "flowbite-react";
+import { Carousel } from "flowbite-react";
 function App() {
 
   return (
-    <>
-      
-      <h1>Apartment Manager for your Building</h1>
-      
-    </>
+    <div>
+      <h1>Flowbite React</h1>
+    </div>
   )
 }
 
