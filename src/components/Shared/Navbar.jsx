@@ -10,7 +10,7 @@ import {
     DropdownDivider
 } from "flowbite-react";
 
-import { NavLink, useNavigate } from "react-router"; // ✅ correct router import
+import { NavLink, useNavigate } from "react-router"; 
 import useAuth from "../../hooks/useAuth";
 
 const Nav = () => {
