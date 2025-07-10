@@ -30,7 +30,7 @@ const Nav = () => {
             <NavbarToggle />
             <NavbarCollapse>
                 <NavLink to={'/'}>Home</NavLink>
-                <NavLink to={'/'}>Apartment</NavLink>
+                <NavLink to={'/apartment'}>Apartment</NavLink>
 
                 {
                     users ? <Dropdown label={

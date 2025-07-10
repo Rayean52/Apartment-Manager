@@ -4,6 +4,7 @@ import Home from "../../pages/Home/Home";
 import SignupForm from "../../AuthPages/SignUp";
 import SigninPage from "../../AuthPages/SignIn";
 import AuthLayout from "../../Layouts/AuthLayout/AuthLayout";
+import Apartment from "../../pages/Apartment/Apartment";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
                 index: true,
                 Component: Home
             },
+            {
+                path: 'apartment',
+                loader: () => fetch('http://localhost:3000/apartments'),
+                Component: Apartment
+            }
         ]
     },
     {
