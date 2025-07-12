@@ -6,7 +6,7 @@ import ApartmentLocation from './BuildingLocation';
 const Home = () => {
   return (
     <div>
-      <Banner></Banner>
+      {/* <Banner></Banner> */}
       <AboutBuilding></AboutBuilding>
       <ApartmentLocation></ApartmentLocation>
     </div>

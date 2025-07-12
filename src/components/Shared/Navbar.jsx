@@ -10,7 +10,7 @@ import {
     DropdownDivider
 } from "flowbite-react";
 
-import { NavLink, useNavigate } from "react-router"; 
+import { Link, NavLink, useNavigate } from "react-router"; 
 import useAuth from "../../hooks/useAuth";
 
 const Nav = () => {
@@ -37,7 +37,7 @@ const Nav = () => {
                         <Avatar img={users.photoURL} rounded status="online" />
                     } dismissOnClick={false}>
                         <DropdownItem>{users.displayName }</DropdownItem>
-                        <DropdownItem>Dashboard</DropdownItem>
+                        <Link to={'/dashboard'} ><DropdownItem>Dashboard</DropdownItem></Link>
                         <DropdownDivider />
                         <DropdownItem onClick={handleSignOut}>Sign out</DropdownItem>
                   </Dropdown> : <Button onClick={() => navigate('/sign-in')} className="bg-gradient-to-br from-green-400 to-blue-600 text-white hover:bg-gradient-to-bl focus:ring-green-200 dark:focus:ring-green-800">

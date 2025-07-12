@@ -5,6 +5,7 @@ import SignupForm from "../../AuthPages/SignUp";
 import SigninPage from "../../AuthPages/SignIn";
 import AuthLayout from "../../Layouts/AuthLayout/AuthLayout";
 import Apartment from "../../pages/Apartment/Apartment";
+import DashboardSidebar from "../../Layouts/DashboardLayout/DashboardLayout";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
                 Component: SignupForm
             }
         ]
+    },
+    {
+        path: '/dashboard',
+        Component: DashboardSidebar
     }
 ])
 

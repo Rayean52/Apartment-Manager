@@ -9,10 +9,11 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { Toaster } from 'react-hot-toast';
+import axios from "axios";
 
 const Apartment = () => {
     const apartments = useLoaderData(); // from loader
-    const { user } = useAuth();
+    const { users } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const Apartment = () => {
     const [minRent, setMinRent] = useState("");
     const [maxRent, setMaxRent] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [applied, setApplied] = useState([]); // user-applied apartments
+    const [applied, setApplied] = useState([]); // users-applied apartments
 
     const perPage = 6;
     const start = (currentPage - 1) * perPage;
@@ -44,17 +45,19 @@ const Apartment = () => {
 
     // Submit agreement
     const handleAgreement = async (apt) => {
-        if (!user) return navigate("/sign-in");
+        if (!users) return navigate("/sign-in");
 
-        const alreadyApplied = applied.find((a) => a.apartment_no === apt.apartment_no && a.email === user.email);
+        const alreadyApplied = applied.find(
+            (a) => a.apartment_no === apt.apartment_no && a.email === users.email
+        );
         if (alreadyApplied) {
             toast.error("You have already applied for this apartment.");
             return;
         }
 
         const agreementData = {
-            name: user.displayName || "Unknown User",
-            email: user.email,
+            name: users.displayName || "Unknown users",
+            email: users.email,
             floor_no: apt.floor_no,
             block_name: apt.block_name,
             apartment_no: apt.apartment_no,
@@ -63,20 +66,17 @@ const Apartment = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/api/applications", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(agreementData),
-            });
+            const res = await axios.post("http://localhost:3000/applications", agreementData);
 
-            if (res.ok) {
+            if (res.status === 200 || res.status === 201) {
                 toast.success("Agreement request sent!");
-                setApplied([...applied, { apartment_no: apt.apartment_no, email: user.email }]);
+                setApplied([...applied, { apartment_no: apt.apartment_no, email: users.email }]);
             } else {
-                toast.error("Something went wrong!");
+                toast.error("Unexpected response. Please try again.");
             }
         } catch (err) {
-            toast.error("Network error!",err);
+            console.error("Agreement Error:", err);
+            toast.error(err.response?.data?.message || "Network error!");
         }
     };
 
@@ -123,6 +123,7 @@ const Apartment = () => {
                             <Card className="bg-gradient-to-tr from-white via-gray-50 to-white rounded-xl shadow-xl h-full flex flex-col">
                                 <img
                                     src={apt.apartment_image}
+                                    loading="lazy"
                                     alt={`Apartment ${apt.apartment_no}`}
                                     className="rounded-lg w-full h-48 object-cover"
                                 />
@@ -139,9 +140,9 @@ const Apartment = () => {
                                         color="purple"
                                         className="w-full"
                                         onClick={() => handleAgreement(apt)}
-                                        disabled={applied.some((a) => a.apartment_no === apt.apartment_no && a.email === user?.email)}
+                                        disabled={applied.some((a) => a.apartment_no === apt.apartment_no && a.email === users?.email)}
                                     >
-                                        {applied.some((a) => a.apartment_no === apt.apartment_no && a.email === user?.email)
+                                        {applied.some((a) => a.apartment_no === apt.apartment_no && a.email === users?.email)
                                             ? "Already Applied"
                                             : "Agreement"}
                                     </Button>
