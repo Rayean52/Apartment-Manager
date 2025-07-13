@@ -6,6 +6,8 @@ import SigninPage from "../../AuthPages/SignIn";
 import AuthLayout from "../../Layouts/AuthLayout/AuthLayout";
 import Apartment from "../../pages/Apartment/Apartment";
 import DashboardSidebar from "../../Layouts/DashboardLayout/DashboardLayout";
+import UserProfile from "../../Layouts/DashboardLayout/DasgPages/UserPage/UserProfile";
+import UserAnnouncements from "../../Layouts/DashboardLayout/DasgPages/UserPage/Announcement";
 
 const router = createBrowserRouter([
     {
@@ -38,8 +40,18 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/dashboard',
-        Component: DashboardSidebar
+        path: 'dashboard',
+        Component: DashboardSidebar,
+        children: [
+            {
+                path: 'user-profile',
+                Component: UserProfile
+            },
+            {
+                path: 'announcement',
+                Component: UserAnnouncements
+            }
+        ]
     }
 ])
 

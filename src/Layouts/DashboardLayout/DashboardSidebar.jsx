@@ -31,7 +31,6 @@ const DashboardSidebar = ({ role }) => {
         <>
             {/* Mobile Header */}
             <div className="md:hidden flex justify-between items-center p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
-                <h2 className="text-xl font-bold">Dashboard</h2>
                 <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
                     {isOpen ? <HiOutlineX /> : <HiOutlineMenuAlt2 />}
                 </button>
@@ -39,7 +38,7 @@ const DashboardSidebar = ({ role }) => {
 
             {/* Sidebar Container */}
             <aside
-                className={`fixed md:relative top-0 left-0 z-50 h-screen w-64 bg-gray-200 shadow-xl transition-transform duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+                className={`fixed md:relative top-0 left-0 z-50 h-screen w-64 bg-purple-100 shadow-xl transition-transform duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
                 {/* Optional Animated Background Blob */}
@@ -55,7 +54,7 @@ const DashboardSidebar = ({ role }) => {
                         <nav className="space-y-2">
                             <NavLink
                                 onClick={handleLinkClick}
-                                to="/dashboard/profile"
+                                to="/dashboard/user-profile"
                                 className={({ isActive }) =>
                                     `${baseLink} ${isActive ? activeClass : ""}`
                                 }
@@ -66,7 +65,7 @@ const DashboardSidebar = ({ role }) => {
 
                             <NavLink
                                 onClick={handleLinkClick}
-                                to="/dashboard/announcements"
+                                to="/dashboard/announcement"
                                 className={({ isActive }) =>
                                     `${baseLink} ${isActive ? activeClass : ""}`
                                 }
