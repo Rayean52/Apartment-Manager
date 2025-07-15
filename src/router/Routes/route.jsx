@@ -8,6 +8,8 @@ import Apartment from "../../pages/Apartment/Apartment";
 import DashboardSidebar from "../../Layouts/DashboardLayout/DashboardLayout";
 import UserProfile from "../../Layouts/DashboardLayout/DasgPages/UserPage/UserProfile";
 import UserAnnouncements from "../../Layouts/DashboardLayout/DasgPages/UserPage/Announcement";
+import MakePayment from "../../Layouts/DashboardLayout/DasgPages/MemberPage/MakePayment";
+import PaymentHistory from "../../Layouts/DashboardLayout/DasgPages/MemberPage/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
             {
                 path: 'announcement',
                 Component: UserAnnouncements
+            },
+            {
+                path: 'make-payment',
+                Component: MakePayment
+            },
+            {
+                path: 'payment-history',
+                Component: PaymentHistory
             }
         ]
     }

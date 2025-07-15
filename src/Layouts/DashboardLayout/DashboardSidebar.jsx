@@ -76,30 +76,28 @@ const DashboardSidebar = ({ role }) => {
                         </nav>
 
                         {/* Member Links */}
-                        {role === "member" && (
-                            <nav className="mt-6 space-y-2">
-                                <NavLink
-                                    onClick={handleLinkClick}
-                                    to="/dashboard/payment"
-                                    className={({ isActive }) =>
-                                        `${baseLink} ${isActive ? activeClass : ""}`
-                                    }
-                                >
-                                    <HiOutlineCreditCard className="text-xl" />
-                                    Make Payment
-                                </NavLink>
-                                <NavLink
-                                    onClick={handleLinkClick}
-                                    to="/dashboard/payment-history"
-                                    className={({ isActive }) =>
-                                        `${baseLink} ${isActive ? activeClass : ""}`
-                                    }
-                                >
-                                    <HiOutlineClipboardList className="text-xl" />
-                                    Payment History
-                                </NavLink>
-                            </nav>
-                        )}
+                        <nav className="mt-6 space-y-2">
+                            <NavLink
+                                onClick={handleLinkClick}
+                                to="/dashboard/make-payment"
+                                className={({ isActive }) =>
+                                    `${baseLink} ${isActive ? activeClass : ""}`
+                                }
+                            >
+                                <HiOutlineCreditCard className="text-xl text-black" />
+                                Make Payment
+                            </NavLink>
+                            <NavLink
+                                onClick={handleLinkClick}
+                                to="/dashboard/payment-history"
+                                className={({ isActive }) =>
+                                    `${baseLink} ${isActive ? activeClass : ""}`
+                                }
+                            >
+                                <HiOutlineClipboardList className="text-xl" />
+                                Payment History
+                            </NavLink>
+                        </nav>
 
                         {/* Admin Links */}
                         {role === "admin" && (
