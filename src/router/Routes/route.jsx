@@ -10,6 +10,9 @@ import UserProfile from "../../Layouts/DashboardLayout/DasgPages/UserPage/UserPr
 import UserAnnouncements from "../../Layouts/DashboardLayout/DasgPages/UserPage/Announcement";
 import MakePayment from "../../Layouts/DashboardLayout/DasgPages/MemberPage/MakePayment";
 import PaymentHistory from "../../Layouts/DashboardLayout/DasgPages/MemberPage/PaymentHistory";
+import AdminProfile from "../../Layouts/DashboardLayout/DasgPages/AdminPage/AdminProfile";
+import ManageMembers from "../../Layouts/DashboardLayout/DasgPages/AdminPage/ManageMembers";
+import MakeAnnouncement from "../../Layouts/DashboardLayout/DasgPages/AdminPage/MakeAnnouncement";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +63,18 @@ const router = createBrowserRouter([
             {
                 path: 'payment-history',
                 Component: PaymentHistory
+            },
+            {
+                path: 'admin-profile',
+                Component: AdminProfile
+            },
+            {
+                path: 'manage-members',
+                Component: ManageMembers
+            },
+            {
+                path: 'make-announcement',
+                Component: MakeAnnouncement
             }
         ]
     }

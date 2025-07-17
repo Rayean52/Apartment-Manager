@@ -100,7 +100,6 @@ const DashboardSidebar = ({ role }) => {
                         </nav>
 
                         {/* Admin Links */}
-                        {role === "admin" && (
                             <nav className="mt-6 space-y-2">
                                 <NavLink
                                     onClick={handleLinkClick}
@@ -153,7 +152,6 @@ const DashboardSidebar = ({ role }) => {
                                     Manage Coupons
                                 </NavLink>
                             </nav>
-                        )}
                     </div>
 
                     {/* Footer / Logout button (optional) */}
