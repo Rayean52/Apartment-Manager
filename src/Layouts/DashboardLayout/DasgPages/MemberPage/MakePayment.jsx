@@ -2,13 +2,16 @@
 import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import useAuth from "../../../../hooks/useAuth";
+import { useNavigate } from "react-router"; 
+
+
 
 const MakePayment = () => {
     const { users } = useAuth();
+    const navigate = useNavigate();
 
     const agreementInfo = {
         email: users?.email,
@@ -53,12 +56,20 @@ const MakePayment = () => {
             return;
         }
 
-        toast.success("Redirecting to payment...");
-        console.log({
-            ...agreementInfo,
-            month,
+        const paymentData = {
+            email: users?.email,
+            floor: agreementInfo.floor,
+            block: agreementInfo.block,
+            apartment: agreementInfo.apartment,
+            originalRent: agreementInfo.rent,
             finalAmount: finalRent,
-        });
+            couponCode: isCouponApplied ? couponCode : null,
+            month,
+            paymentDate: new Date(),
+        };
+
+        toast.success("Redirecting to payment...");
+        navigate("/dashboard/payment-success", { state: paymentData });
     };
 
     return (
