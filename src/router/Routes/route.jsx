@@ -15,6 +15,7 @@ import ManageMembers from "../../Layouts/DashboardLayout/DasgPages/AdminPage/Man
 import MakeAnnouncement from "../../Layouts/DashboardLayout/DasgPages/AdminPage/MakeAnnouncement";
 import AgreementRequests from "../../Layouts/DashboardLayout/DasgPages/AdminPage/AgreementRequest";
 import ManageCoupons from "../../Layouts/DashboardLayout/DasgPages/AdminPage/ManageCoupon";
+import MemberProfile from "../../Layouts/DashboardLayout/DasgPages/MemberPage/MemberProfile";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
         path: 'dashboard',
         Component: DashboardSidebar,
         children: [
+            //users routes
             {
                 path: 'user-profile',
                 Component: UserProfile
@@ -57,6 +59,12 @@ const router = createBrowserRouter([
             {
                 path: 'announcement',
                 Component: UserAnnouncements
+            },
+
+            //members routes
+            {
+                path: 'member-profile',
+                Component: MemberProfile
             },
             {
                 path: 'make-payment',
@@ -66,6 +74,8 @@ const router = createBrowserRouter([
                 path: 'payment-history',
                 Component: PaymentHistory
             },
+
+            //admin routes
             {
                 path: 'admin-profile',
                 Component: AdminProfile
