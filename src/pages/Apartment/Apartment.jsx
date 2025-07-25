@@ -66,7 +66,7 @@ const Apartment = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:3000/applications", agreementData);
+            const res = await axios.post("https://apartment-manager-kappa.vercel.app/applications", agreementData);
 
             if (res.status === 200 || res.status === 201) {
                 toast.success("Agreement request sent!");

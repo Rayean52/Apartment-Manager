@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'apartment',
-                loader: () => fetch('http://localhost:3000/apartments'),
+                loader: () => fetch('https://apartment-manager-kappa.vercel.app/apartments'),
                 Component: Apartment
             }
         ]

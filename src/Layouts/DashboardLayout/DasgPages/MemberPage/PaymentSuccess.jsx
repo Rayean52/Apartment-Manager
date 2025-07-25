@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
         }
 
         // Save to DB
-        fetch("http://localhost:3000/payment-history", {
+        fetch("https://apartment-manager-kappa.vercel.app/payment-history", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(paymentData),

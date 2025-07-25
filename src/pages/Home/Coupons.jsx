@@ -5,7 +5,7 @@ const CouponSection = () => {
     const [coupons, setCoupons] = useState([]);
 
     useEffect(() => {
-        fetch("https://your-api-url.com/coupons") // Replace with your actual API
+        fetch("https://apartment-manager-kappa.vercel.app/coupons") 
             .then((res) => res.json())
             .then((data) => setCoupons(data));
     }, []);

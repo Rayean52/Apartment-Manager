@@ -13,7 +13,7 @@ const PaymentHistory = () => {
         AOS.init({ once: true });
 
         // TODO: Replace this with your actual API endpoint
-        fetch(`http://localhost:3000/payments/${users?.email}`)
+        fetch(`https://apartment-manager-kappa.vercel.app/payments/${users?.email}`)
             .then((res) => res.json())
             .then((data) => setPayments(data || []))
             .catch((err) => console.error("Failed to fetch payments", err));
@@ -58,8 +58,8 @@ const PaymentHistory = () => {
                             payments.map((payment, index) => (
                                 <tr key={index} className="hover:bg-blue-50 transition">
                                     <td>{payment.month}</td>
-                                    <td>{payment.amount}</td>
-                                    <td>{new Date(payment.date).toLocaleDateString()}</td>
+                                    <td>{payment.finalAmount}</td>
+                                    <td>{new Date(payment.paymentDate).toLocaleDateString()}</td>
                                 </tr>
                             ))
                         ) : (

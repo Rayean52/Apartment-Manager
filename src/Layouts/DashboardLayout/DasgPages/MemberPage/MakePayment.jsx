@@ -32,7 +32,7 @@ const MakePayment = () => {
 
     const handleApplyCoupon = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/coupons/${couponCode}`);
+            const res = await fetch(`https://apartment-manager-kappa.vercel.app/coupons/${couponCode}`);
             if (!res.ok) throw new Error("Invalid coupon");
 
             const coupon = await res.json();

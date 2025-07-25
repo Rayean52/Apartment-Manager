@@ -12,14 +12,33 @@ const MakeAnnouncement = () => {
         AOS.init({ once: true });
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Announcement submitted:", form);
-        alert("✅ Announcement posted!");
-        // Reset form
-        setForm({ title: "", description: "" });
-        // TODO: Send to backend
+
+        try {
+            const res = await fetch("https://apartment-manager-kappa.vercel.app/announcements", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(form),
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.insertedId) {
+                alert("✅ Announcement posted!");
+                setForm({ title: "", description: "" });
+            } else {
+                alert("❌ Failed to post announcement. Please try again.");
+                console.error(data.message);
+            }
+        } catch (err) {
+            console.error("Error submitting announcement:", err);
+            alert("🚫 Server error. Please try again later.");
+        }
     };
+
 
     return (
         <motion.div

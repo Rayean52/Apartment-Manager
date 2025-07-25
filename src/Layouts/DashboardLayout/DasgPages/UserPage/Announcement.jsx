@@ -1,38 +1,25 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import AOS from "aos";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const UserAnnouncements = () => {
 
+    const [announcements, setAnnouncements] = useState([]);
+
     useEffect(() => {
         AOS.init({ once: true });
+
+        fetch("https://apartment-manager-kappa.vercel.app/announcements")
+            .then(res => res.json())
+            .then(data => setAnnouncements(data || []))
+            .catch(err => console.error("Failed to load announcements", err));
     }, []);
 
 
 
-    const dummyAnnouncements = [
-        {
-            title: "Important Water Maintenance Notice",
-            content:
-                "Due to scheduled maintenance, the water supply will be interrupted from 10:00 AM to 2:00 PM on Thursday. Please store necessary water beforehand. We apologize for the inconvenience and appreciate your cooperation.",
-            date: "July 10, 2025",
-        },
-        {
-            title: "Playground Renovation in Progress",
-            content:
-                "The apartment playground area is under renovation for the next 7 days. We are upgrading flooring, safety nets, and installing new play equipment. Children are advised not to enter the site for safety reasons.",
-            date: "July 8, 2025",
-        },
-        {
-            title: "Monthly Fire Drill Reminder",
-            content:
-                "A fire drill will take place on July 12 at 11:00 AM. All residents must participate and evacuate as instructed. Please do not use elevators. Your safety is our priority.",
-            date: "July 7, 2025",
-        },
-    ];
-
+    
     return (
         <motion.section
             className="min-h-[85vh] px-6 py-16 bg-gradient-to-br from-blue-50 via-purple-50 to-cyan-50 flex flex-col justify-start"
@@ -52,7 +39,7 @@ const UserAnnouncements = () => {
 
             {/* Announcements List */}
             <div className="max-w-5xl mx-auto space-y-10">
-                {dummyAnnouncements.map((announcement, index) => (
+                {announcements.map((announcement, index) => (
                     <div
                         key={index}
                         className="bg-white/80 backdrop-blur-md border border-white/30 rounded-xl shadow-md p-6 transition hover:shadow-xl"
@@ -62,10 +49,10 @@ const UserAnnouncements = () => {
                             {announcement.title}
                         </h2>
                         <p className="text-gray-600 text-sm mb-4 italic">
-                            📅 {announcement.date}
+                            📅 {new Date(announcement.createdAt).toLocaleDateString()}
                         </p>
                         <p className="text-gray-800 text-base leading-relaxed">
-                            {announcement.content}
+                            {announcement.description}
                         </p>
                     </div>
                 ))}
