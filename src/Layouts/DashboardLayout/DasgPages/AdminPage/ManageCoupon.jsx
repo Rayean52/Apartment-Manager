@@ -1,24 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
-const initialCoupons = [
-    {
-        code: "JULY25",
-        discount: 25,
-        description: "25% off for July rent",
-    },
-    {
-        code: "WELCOME10",
-        discount: 10,
-        description: "10% discount for first-time payment",
-    },
-];
+import toast from "react-hot-toast";
 
 const ManageCoupons = () => {
-    const [coupons, setCoupons] = useState(initialCoupons);
+    const [coupons, setCoupons] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         code: "",
@@ -26,20 +14,43 @@ const ManageCoupons = () => {
         description: "",
     });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+    useEffect(() => {
+        const fetchCoupons = async () => {
+            try {
+                const res = await fetch("https://apartment-manager-kappa.vercel.app/coupons");
+                const data = await res.json();
+                setCoupons(data || []);
+            } catch (error) {
+                console.error("Failed to load coupons:", error);
+            }
+        };
 
-    const handleAddCoupon = () => {
-        setCoupons([...coupons, formData]);
+        fetchCoupons();
+    }, []);
+
+    const handleAddCoupon = async () => {
+        try {
+            const res = await fetch("https://apartment-manager-kappa.vercel.app/coupons", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.insertedId) {
+                setCoupons([...coupons, formData]);
+                toast.success("Coupon added!");
+            } else {
+                toast.error("Failed to add coupon.");
+            }
+        } catch (error) {
+            console.error("Add coupon error:", error);
+            toast.error("Server error.");
+        }
+
         setFormData({ code: "", discount: "", description: "" });
         setIsOpen(false);
-
-        // TODO: Send to backend via POST
     };
 
     return (
@@ -108,7 +119,7 @@ const ManageCoupons = () => {
                                     type="text"
                                     name="code"
                                     value={formData.code}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                                     className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
                                 />
                             </div>
@@ -118,7 +129,7 @@ const ManageCoupons = () => {
                                     type="number"
                                     name="discount"
                                     value={formData.discount}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
                                     className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
                                 />
                             </div>
@@ -128,7 +139,7 @@ const ManageCoupons = () => {
                                     name="description"
                                     rows="3"
                                     value={formData.description}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
                                 />
                             </div>

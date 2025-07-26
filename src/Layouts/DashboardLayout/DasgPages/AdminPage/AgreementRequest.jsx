@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const dummyRequests = [
     {
@@ -33,14 +34,62 @@ const AgreementRequests = () => {
 
     useEffect(() => {
         AOS.init({ once: true });
+
+        fetch("https://apartment-manager-kappa.vercel.app/applications")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("All agreements:", data);
+                setRequests(data); // Set to your state
+            })
+            .catch((err) => {
+                console.error("Failed to load agreements:", err);
+            });
+
     }, []);
 
-    const handleAction = (email, action) => {
+    const handleAction = async (email, action) => {
         const updated = requests.filter((req) => req.email !== email);
         setRequests(updated);
+
+        try {
+            if (action === "accept") {
+                // 1. Update application status to "accepted"
+                const res1 = await fetch(`https://apartment-manager-kappa.vercel.app/applications/status/${email}`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ status: "accepted", role: "member" }),
+                });
+
+                const data1 = await res1.json();
+
+                if (data1.modifiedCount > 0) {
+                    toast.success(`✅ ${email} promoted to member!`);
+                } else {
+                    toast.error(`Failed to update status for ${email}`);
+                }
+
+            } else if (action === "reject") {
+                // 2. Delete the application
+                const res2 = await fetch(`https://apartment-manager-kappa.vercel.app/applications/${email}`, {
+                    method: "DELETE",
+                });
+
+                const data2 = await res2.json();
+
+                if (data2.deletedCount > 0) {
+                    toast.success(`❌ ${email} application rejected and removed.`);
+                } else {
+                    toast.error(`Failed to remove application for ${email}`);
+                }
+            }
+        } catch (err) {
+            console.error("Action error:", err);
+            toast.error("Something went wrong.");
+        }
+
         console.log(`${action.toUpperCase()} -> ${email}`);
-        // TODO: Update DB (status = checked), if accept then also update role = member
     };
+
 
     return (
         <motion.div
@@ -78,9 +127,9 @@ const AgreementRequests = () => {
                                 <tr key={i}>
                                     <td>{req.name}</td>
                                     <td>{req.email}</td>
-                                    <td>{req.floor}</td>
-                                    <td>{req.block}</td>
-                                    <td>{req.room}</td>
+                                    <td>{req.floor_no}</td>
+                                    <td>{req.block_name}</td>
+                                    <td>{req.apartment_no}</td>
                                     <td>{req.rent}</td>
                                     <td>{req.requestDate}</td>
                                     <td className="flex items-center gap-2 mt-2">

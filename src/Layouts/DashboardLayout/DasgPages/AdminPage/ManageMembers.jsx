@@ -8,21 +8,43 @@ const ManageMembers = () => {
     const [members, setMembers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Dummy members for demonstration
     useEffect(() => {
         AOS.init({ once: true });
 
-        setMembers([
-            { id: 1, name: "Abdullah Rayean", email: "rayean@example.com" },
-            { id: 2, name: "Tania Akter", email: "tania@example.com" },
-            { id: 3, name: "Ziaul Islam", email: "ziaul@example.com" },
-        ]);
+        fetch("https://apartment-manager-kappa.vercel.app/applications-members")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Approved members:", data);
+                setMembers(data); // or setAgreements(data) based on your state
+            })
+            .catch((err) => {
+                console.error("Failed to fetch member agreements:", err);
+            });
     }, []);
 
-    const handleRemoveRole = (id) => {
-        const updated = members.filter((member) => member.id !== id);
-        setMembers(updated);
-        alert("Role changed to 'user'. Member access revoked.");
+    const handleRemoveRole = async (id) => {
+        try {
+            const res = await fetch(`https://apartment-manager-kappa.vercel.app/applications/role/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ role: "user" }),
+            });
+
+            const data = await res.json();
+
+            if (data.modifiedCount > 0) {
+                // Remove from UI
+                const updated = members.filter((member) => member._id !== id);
+                setMembers(updated);
+
+                alert("Role changed to 'user'. Member access revoked.");
+            } else {
+                alert("Failed to change role. Try again.");
+            }
+        } catch (error) {
+            console.error("Role change error:", error);
+            alert("Server error. Try again later.");
+        }
     };
 
     // Filtered members based on search
@@ -73,13 +95,13 @@ const ManageMembers = () => {
                     </thead>
                     <tbody>
                         {filteredMembers.length > 0 ? (
-                            filteredMembers.map((member) => (
-                                <tr key={member.id} className="hover:bg-indigo-50">
+                            filteredMembers.map((member, index) => (
+                                <tr key={index} className="hover:bg-indigo-50">
                                     <td className="py-4 font-medium text-gray-800">{member.name}</td>
                                     <td className="text-gray-600">{member.email}</td>
                                     <td className="text-center">
                                         <button
-                                            onClick={() => handleRemoveRole(member.id)}
+                                            onClick={() => handleRemoveRole(member._id)}
                                             className="btn btn-sm btn-error hover:btn-outline transition duration-300"
                                         >
                                             Remove

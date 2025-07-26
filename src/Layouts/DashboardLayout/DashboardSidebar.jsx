@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import {
     HiOutlineUser,
@@ -14,17 +14,42 @@ import {
 } from "react-icons/hi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
+import useAuth from "../../hooks/useAuth";
 
 
-// eslint-disable-next-line no-unused-vars
-const DashboardSidebar = ({ role }) => {
+const DashboardSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [role, setRole] = useState(null); 
+    const { users } = useAuth();
+
+    const adminEmail = "rayeanabdullah@gmail.com";
+    const isAdmin = users?.email === adminEmail;
 
     const handleLinkClick = () => {
         if (window.innerWidth < 768) {
             setIsOpen(false);
         }
     };
+
+    useEffect(() => {
+        const fetchRole = async () => {
+            try {
+                const res = await fetch(
+                    `https://apartment-manager-kappa.vercel.app/user-role?email=${users?.email}`
+                );
+                const data = await res.json();
+                if (res.ok) {
+                    setRole(data.role); // user, member, or admin
+                }
+            } catch (err) {
+                console.error("Failed to fetch role:", err);
+            }
+        };
+
+        if (users?.email) {
+            fetchRole();
+        }
+    }, [users?.email]);
 
     const baseLink =
         "text-gray-700 hover:text-white flex items-center gap-3 px-4 py-2 rounded-md transition";
@@ -82,92 +107,96 @@ const DashboardSidebar = ({ role }) => {
                         </nav>
 
                         {/* Member Links */}
-                        <nav className="mt-6 space-y-2">
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/member-profile"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineCreditCard className="text-xl text-black" />
-                                Member Profile
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/make-payment"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineCreditCard className="text-xl text-black" />
-                                Make Payment
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/payment-history"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineClipboardList className="text-xl" />
-                                Payment History
-                            </NavLink>
-                        </nav>
+                        {role === "member" && (
+                            <nav className="mt-6 space-y-2">
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/member-profile"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineUser className="text-xl" />
+                                    Member Profile
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/make-payment"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineCreditCard className="text-xl" />
+                                    Make Payment
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/payment-history"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineClipboardList className="text-xl" />
+                                    Payment History
+                                </NavLink>
+                            </nav>
+                        )}
 
                         {/* Admin Links */}
-                        <nav className="mt-6 space-y-2">
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/admin-profile"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineUser className="text-xl" />
-                                Admin Profile
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/manage-members"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineUsers className="text-xl" />
-                                Manage Members
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/make-announcement"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineSpeakerphone className="text-xl" />
-                                Make Announcement
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/agreement-requests"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineDocumentText className="text-xl" />
-                                Agreement Requests
-                            </NavLink>
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/manage-coupons"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineTag className="text-xl" />
-                                Manage Coupons
-                            </NavLink>
-                        </nav>
+                        {isAdmin && (
+                            <nav className="mt-6 space-y-2">
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/admin-profile"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineUser className="text-xl" />
+                                    Admin Profile
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/manage-members"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineUsers className="text-xl" />
+                                    Manage Members
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/make-announcement"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineSpeakerphone className="text-xl" />
+                                    Make Announcement
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/agreement-requests"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineDocumentText className="text-xl" />
+                                    Agreement Requests
+                                </NavLink>
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/manage-coupons"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineTag className="text-xl" />
+                                    Manage Coupons
+                                </NavLink>
+                            </nav>
+                        )}
 
                         <nav className=" mt-6 space-y-2">
                             <NavLink
