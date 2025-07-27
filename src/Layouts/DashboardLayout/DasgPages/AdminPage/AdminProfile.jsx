@@ -8,7 +8,6 @@ import useAuth from "../../../../hooks/useAuth";
 const AdminProfile = () => {
     const { users } = useAuth();
 
-    // Placeholder values (replace with actual fetched data later)
     const totalRooms = 100;
     const availableRooms = 35;
     const unavailableRooms = totalRooms - availableRooms;

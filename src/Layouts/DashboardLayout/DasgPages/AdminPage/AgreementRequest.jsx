@@ -5,32 +5,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import Loading from "../../../../components/Shared/Loading";
 
-const dummyRequests = [
-    {
-        name: "John Doe",
-        email: "john@example.com",
-        floor: 3,
-        block: "B",
-        room: "302",
-        rent: 15000,
-        requestDate: "2025-07-15",
-        status: "pending",
-    },
-    {
-        name: "Sarah Khan",
-        email: "sarah@example.com",
-        floor: 5,
-        block: "A",
-        room: "503",
-        rent: 18000,
-        requestDate: "2025-07-13",
-        status: "pending",
-    },
-];
+
 
 const AgreementRequests = () => {
-    const [requests, setRequests] = useState(dummyRequests);
+
+    const [requests, setRequests] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         AOS.init({ once: true });
@@ -39,7 +21,8 @@ const AgreementRequests = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log("All agreements:", data);
-                setRequests(data); // Set to your state
+                setRequests(data);
+                setLoading(false)
             })
             .catch((err) => {
                 console.error("Failed to load agreements:", err);
@@ -48,9 +31,6 @@ const AgreementRequests = () => {
     }, []);
 
     const handleAction = async (email, action) => {
-        const updated = requests.filter((req) => req.email !== email);
-        setRequests(updated);
-
         try {
             if (action === "accept") {
                 // 1. Update application status to "accepted"
@@ -63,9 +43,13 @@ const AgreementRequests = () => {
                 const data1 = await res1.json();
 
                 if (data1.modifiedCount > 0) {
+                    // Remove from UI
+                    const updated = requests.filter((req) => req.email !== email);
+                    setRequests(updated);
+
                     toast.success(`✅ ${email} promoted to member!`);
                 } else {
-                    toast.error(`Failed to update status for ${email}`);
+                    toast.error(`❌ Failed to update status for ${email}`);
                 }
 
             } else if (action === "reject") {
@@ -77,18 +61,27 @@ const AgreementRequests = () => {
                 const data2 = await res2.json();
 
                 if (data2.deletedCount > 0) {
-                    toast.success(`❌ ${email} application rejected and removed.`);
+                    // Remove from UI
+                    const updated = requests.filter((req) => req.email !== email);
+                    setRequests(updated);
+
+                    toast.success(`❌ ${email}'s application rejected and removed.`);
                 } else {
-                    toast.error(`Failed to remove application for ${email}`);
+                    toast.error(`❌ Failed to remove application for ${email}`);
                 }
             }
         } catch (err) {
             console.error("Action error:", err);
-            toast.error("Something went wrong.");
+            toast.error("Something went wrong. Try again.");
         }
 
         console.log(`${action.toUpperCase()} -> ${email}`);
     };
+
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
 
     return (

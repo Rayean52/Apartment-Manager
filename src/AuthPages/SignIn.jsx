@@ -29,7 +29,7 @@ export default function SigninPage() {
 
   const onSubmit = (data) => {
     console.log("Sign In Data:", data);
-    signIn(data.email, data.passowrd).then((result) => {
+    signIn(data.email, data.password).then((result) => {
       console.log(result)
       navigate('/')
     }).catch((error) => {
@@ -66,8 +66,7 @@ export default function SigninPage() {
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
-            </div>
-
+            </div> 
             {/* Password */}
             <div>
               <Label htmlFor="password" value="Password" />

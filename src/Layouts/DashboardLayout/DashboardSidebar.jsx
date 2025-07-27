@@ -15,6 +15,7 @@ import {
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
+import Loading from "../../components/Shared/Loading";
 
 
 const DashboardSidebar = () => {
@@ -39,7 +40,7 @@ const DashboardSidebar = () => {
                 );
                 const data = await res.json();
                 if (res.ok) {
-                    setRole(data.role); // user, member, or admin
+                    setRole(data.role);
                 }
             } catch (err) {
                 console.error("Failed to fetch role:", err);
@@ -54,8 +55,9 @@ const DashboardSidebar = () => {
     const baseLink =
         "text-gray-700 hover:text-white flex items-center gap-3 px-4 py-2 rounded-md transition";
 
-    const activeClass = "bg-white/20 text-white font-semibold";
+    const activeClass = "bg-white/20 text-purpl-500 font-semibold";
 
+    
     return (
         <>
             {/* Mobile Header */}
@@ -82,29 +84,27 @@ const DashboardSidebar = () => {
 
 
                         {/* Common Navs */}
-                        <nav className="space-y-2">
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/user-profile"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineUser className="text-xl" />
-                                My Profile
-                            </NavLink>
+                        
+                            {
+                            role === "user" && (
+                                <nav className="space-y-2">
+                                    <NavLink
+                                        onClick={handleLinkClick}
+                                        to="/dashboard/user-profile"
+                                        className={({ isActive }) =>
+                                            `${baseLink} ${isActive ? activeClass : ""}`
+                                        }
+                                    >
+                                        <HiOutlineUser className="text-xl" />
+                                        My Profile
+                                    </NavLink>
 
-                            <NavLink
-                                onClick={handleLinkClick}
-                                to="/dashboard/announcement"
-                                className={({ isActive }) =>
-                                    `${baseLink} ${isActive ? activeClass : ""}`
-                                }
-                            >
-                                <HiOutlineBell className="text-xl" />
-                                Announcements
-                            </NavLink>
-                        </nav>
+                                </nav>
+
+                                )
+                        }
+                        
+                     
 
                         {/* Member Links */}
                         {role === "member" && (
@@ -138,6 +138,21 @@ const DashboardSidebar = () => {
                                 >
                                     <HiOutlineClipboardList className="text-xl" />
                                     Payment History
+                                </NavLink>
+                            </nav>
+                        )}
+
+                        {(role === "user" || role === "member") && (
+                            <nav className="space-y-2">
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/announcement"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineUser className="text-xl" />
+                                    Announcements
                                 </NavLink>
                             </nav>
                         )}
