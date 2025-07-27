@@ -23,14 +23,15 @@ const Nav = () => {
 
 
     return (
-        <Navbar fluid rounded>
+        <Navbar fluid rounded className="py-5 z-50 relative">
             <NavbarBrand>
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Apartment Manager</span>
+                <img className="w-12 m-2" src="https://i.ibb.co/rRnWxK3V/social-10096251.png" alt="" />
+                <span className="self-center whitespace-nowrap text-3xl font-bold dark:text-white">FlatFlow</span>
             </NavbarBrand>
             <NavbarToggle />
             <NavbarCollapse>
-                <NavLink to={'/'}>Home</NavLink>
-                <NavLink to={'/apartment'}>Apartment</NavLink>
+                <NavLink className="text-lg" to={'/'}>Home</NavLink>
+                <NavLink className="text-lg" to={'/apartment'}>Apartment</NavLink>
 
                 {
                     users ? <Dropdown label={

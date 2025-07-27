@@ -5,10 +5,10 @@ import "react-multi-carousel/lib/styles.css";
 import { motion } from "framer-motion"; // for animations
 
 const bannerImages = [
-  "https://images.unsplash.com/photo-1599423300746-b62533397364",
-  "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
-  "https://images.unsplash.com/photo-1613490493576-7fde63acd811",
-  "https://images.unsplash.com/photo-1559715541-5daf8a36f4c3",
+  "https://i.ibb.co/HDXhPLkk/bedroom-with-a-black-wall-and-large-windows-1.jpg",
+  "https://i.ibb.co/n8f70Pv4/comfortable-living-room-cat.jpg",
+  "https://i.ibb.co/ZzH53zjL/open-plan-kitchen-with-wooden-fixtures.jpg",
+  "https://i.ibb.co/zTg8HKn9/family-room-with-large-screen-doors.jpg",
 ];
 
 const responsive = {
@@ -20,7 +20,7 @@ const responsive = {
 
 const Banner = () => {
   return (
-    <div className="relative w-full md:h-[65vh] lg:h-[80vh] h-auto rounded-xl overflow-hidden shadow-2xl mt-6">
+    <div className="relative w-full md:h-[65vh] lg:h-[80vh] h-auto rounded-xl overflow-hidden shadow-2xl ">
       {/* Image Carousel */}
       <Carousel
         responsive={responsive}
@@ -37,7 +37,7 @@ const Banner = () => {
             src={img}
             alt={`banner-${index}`}
             loading="lazy"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover z-0"
           />
         ))}
       </Carousel>

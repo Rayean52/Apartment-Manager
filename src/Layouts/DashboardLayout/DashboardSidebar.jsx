@@ -15,8 +15,6 @@ import {
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
-import Loading from "../../components/Shared/Loading";
-
 
 const DashboardSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -85,24 +83,20 @@ const DashboardSidebar = () => {
 
                         {/* Common Navs */}
                         
-                            {
-                            role === "user" && (
-                                <nav className="space-y-2">
-                                    <NavLink
-                                        onClick={handleLinkClick}
-                                        to="/dashboard/user-profile"
-                                        className={({ isActive }) =>
-                                            `${baseLink} ${isActive ? activeClass : ""}`
-                                        }
-                                    >
-                                        <HiOutlineUser className="text-xl" />
-                                        My Profile
-                                    </NavLink>
-
-                                </nav>
-
-                                )
-                        }
+                        {role === "user" && (
+                            <nav className="space-y-2">
+                                <NavLink
+                                    onClick={handleLinkClick}
+                                    to="/dashboard/user-profile"
+                                    className={({ isActive }) =>
+                                        `${baseLink} ${isActive ? activeClass : ""}`
+                                    }
+                                >
+                                    <HiOutlineUser className="text-xl" />
+                                    My Profile
+                                </NavLink>
+                            </nav>
+                        )}
                         
                      
 

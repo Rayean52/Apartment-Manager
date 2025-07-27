@@ -66,7 +66,7 @@ export default function SigninPage() {
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
-            </div> 
+            </div>
             {/* Password */}
             <div>
               <Label htmlFor="password" value="Password" />
@@ -131,36 +131,36 @@ export default function SigninPage() {
       {/* Custom Styles */}
       <style>
         {`
-    .bg-signin-green-gradient {
-      background: linear-gradient(-45deg, #15B392, #A0D683, #16423C);
-      background-size: 300% 300%;
-      animation: gradientShift 25s ease infinite;
+    .bg - signin - green - gradient {
+          background: linear-gradient(-45deg, #15B392, #A0D683, #16423C);
+        background-size: 300% 300%;
+        animation: gradientShift 25s ease infinite;
     }
 
-    .input-glow input {
-      border: 2px solid transparent;
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      background-image:
+        .input-glow input {
+          border: 2px solid transparent;
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        background-image:
         linear-gradient(#fff, #fff),
         linear-gradient(to right, #15B392, #A0D683);
-      color: #1f2937;
-      border-radius: 0.5rem;
-      transition: box-shadow 0.3s ease;
+        color: #1f2937;
+        border-radius: 0.5rem;
+        transition: box-shadow 0.3s ease;
     }
 
-    .input-glow input:focus {
-      outline: none;
-      box-shadow: 0 0 10px 2px rgba(21, 179, 146, 0.4);
-      background-image:
+        .input-glow input:focus {
+          outline: none;
+        box-shadow: 0 0 10px 2px rgba(21, 179, 146, 0.4);
+        background-image:
         linear-gradient(#fff, #fff),
         linear-gradient(to right, #15B392, #16423C);
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+        @keyframes gradientShift {
+          0 % { background- position: 0% 50%; }
+        50% {background - position: 100% 50%; }
+        100% {background - position: 0% 50%; }
     }
   `}
       </style>

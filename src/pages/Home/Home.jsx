@@ -7,7 +7,7 @@ import CouponSection from './Coupons';
 const Home = () => {
   return (
     <div>
-      {/* <Banner></Banner> */}
+      <Banner></Banner>
       <AboutBuilding></AboutBuilding>
       <CouponSection></CouponSection>
       <ApartmentLocation></ApartmentLocation>

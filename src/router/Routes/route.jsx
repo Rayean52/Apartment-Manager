@@ -17,10 +17,13 @@ import AgreementRequests from "../../Layouts/DashboardLayout/DasgPages/AdminPage
 import ManageCoupons from "../../Layouts/DashboardLayout/DasgPages/AdminPage/ManageCoupon";
 import MemberProfile from "../../Layouts/DashboardLayout/DasgPages/MemberPage/MemberProfile";
 import PaymentSuccess from "../../Layouts/DashboardLayout/DasgPages/MemberPage/PaymentSuccess";
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
     {
         path: '/',
+        errorElement: <ErrorPage></ErrorPage>,
         Component: HomeLayout,
         children: [
             {
@@ -55,51 +58,51 @@ const router = createBrowserRouter([
             //users routes
             {
                 path: 'user-profile',
-                Component: UserProfile
+                element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
             },
             {
                 path: 'announcement',
-                Component: UserAnnouncements
+                element: <PrivateRoute><UserAnnouncements></UserAnnouncements></PrivateRoute>
             },
 
             //members routes
             {
                 path: 'member-profile',
-                Component: MemberProfile
+                element: <PrivateRoute><MemberProfile></MemberProfile></PrivateRoute>
             },
             {
                 path: 'make-payment',
-                Component: MakePayment
+                element: <PrivateRoute><MakePayment></MakePayment></PrivateRoute>
             },
             {
                 path: 'payment-success',
-                Component: PaymentSuccess
+                element: <PrivateRoute><PaymentSuccess></PaymentSuccess></PrivateRoute>
             },
             {
                 path: 'payment-history',
-                Component: PaymentHistory
+                element: <PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
             },
 
             //admin routes
             {
                 path: 'admin-profile',
-                Component: AdminProfile
+                element: <PrivateRoute><AdminProfile></AdminProfile></PrivateRoute>
             },
             {
                 path: 'manage-members',
-                Component: ManageMembers
+                element: <PrivateRoute><ManageMembers></ManageMembers></PrivateRoute>
             },
             {
                 path: 'make-announcement',
-                Component: MakeAnnouncement
+                element: <PrivateRoute><MakeAnnouncement></MakeAnnouncement></PrivateRoute>
             },
             {
                 path: 'agreement-requests',
-                Component: AgreementRequests
+                element: <PrivateRoute><AgreementRequests></AgreementRequests></PrivateRoute>
             },
             {
                 path: 'manage-coupons',
-                Component: ManageCoupons
+                element: <PrivateRoute><ManageCoupons></ManageCoupons></PrivateRoute>
             }
         ]
     }

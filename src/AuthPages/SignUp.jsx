@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../firebase.config";
+import toast from "react-hot-toast";
 
 
 
@@ -31,18 +32,34 @@ export default function SignupPage() {
 
 
   const onSubmit = (data) => {
-    console.log(data);
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordRegex.test(data.password)) {
+      return toast.error(
+        "Password must be at least 6 characters and include uppercase & lowercase letters.",
+        {
+          duration: 5000,
+          position: "top-center",
+        }
+      );
+    }
+
     signUp(data.email, data.password).then((result) => {
       console.log(result)
       navigate('/')
       updateProfile(auth.currentUser, {
         displayName: data.name,
         photoURL: data.image
-      }).then(()=>{}).catch((error)=>{console.log(error)})
+      })
+        .then(() => { })
+        .catch((error) => { console.log(error) })
+      
     }).catch((error) => {
       console.log(error)
     });
   };
+
+  
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-animated-gradient">
