@@ -29,6 +29,7 @@ const ManageCoupons = () => {
     }, []);
 
     const handleAddCoupon = async () => {
+        console.log(formData)
         try {
             const res = await fetch("https://apartment-manager-kappa.vercel.app/coupons", {
                 method: "POST",

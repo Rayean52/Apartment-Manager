@@ -22,11 +22,11 @@ const Footer = () => {
         <div>
           <h2 className="text-xl font-semibold mb-3">Quick Links</h2>
           <nav className="flex flex-col gap-2 text-sm">
-            <Link to="/about" className="link link-hover">About Us</Link>
-            <Link to="/contact" className="link link-hover">Contact</Link>
-            <Link to="/faq" className="link link-hover">FAQ</Link>
-            <Link to="/privacy" className="link link-hover">Privacy Policy</Link>
-            <Link to="/terms" className="link link-hover">Terms & Conditions</Link>
+            <Link to="/" className="link link-hover">About Us</Link>
+            <Link to="/" className="link link-hover">Contact</Link>
+            <Link to="/" className="link link-hover">FAQ</Link>
+            <Link to="/" className="link link-hover">Privacy Policy</Link>
+            <Link to="/" className="link link-hover">Terms & Conditions</Link>
           </nav>
         </div>
 

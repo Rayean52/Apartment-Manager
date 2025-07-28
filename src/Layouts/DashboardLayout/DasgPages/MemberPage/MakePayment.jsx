@@ -6,29 +6,41 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import useAuth from "../../../../hooks/useAuth";
 import { useNavigate } from "react-router"; 
+import Loading from "../../../../components/Shared/Loading";
 
 
 
 const MakePayment = () => {
+
+
     const { users } = useAuth();
     const navigate = useNavigate();
 
-    const agreementInfo = {
-        email: users?.email,
-        floor: "5th Floor",
-        block: "B",
-        apartment: "B-502",
-        rent: 15000,
-    };
+    useEffect(() => {
+        AOS.init({ duration: 800 });
+
+        if (users?.email) {
+            fetch(`https://apartment-manager-kappa.vercel.app/member-apartment?email=${users.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setRentedRoom(data);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error("Failed to fetch member apartment", err);
+                    setLoading(false);
+                });
+        }
+    }, [users?.email]);
 
     const [couponCode, setCouponCode] = useState("");
-    const [finalRent, setFinalRent] = useState(agreementInfo.rent);
+    const [finalRent, setFinalRent] = useState("");
     const [isCouponApplied, setIsCouponApplied] = useState(false);
     const [month, setMonth] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [rentedRoom, setRentedRoom] = useState({});
 
-    useEffect(() => {
-        AOS.init({ once: true });
-    }, []);
+   
 
     const handleApplyCoupon = async () => {
         try {
@@ -36,15 +48,15 @@ const MakePayment = () => {
             if (!res.ok) throw new Error("Invalid coupon");
 
             const coupon = await res.json();
-            const discount = (agreementInfo.rent * coupon.percentage) / 100;
-            const newRent = agreementInfo.rent - discount;
+            const discount = (rentedRoom.rent * coupon.percentage) / 100;
+            const newRent = rentedRoom.rent - discount;
 
             setFinalRent(newRent);
             setIsCouponApplied(true);
             toast.success(`Coupon applied! You saved ${discount}৳`);
         } catch (err) {
             toast.error("Invalid or expired coupon");
-            setFinalRent(agreementInfo.rent);
+            setFinalRent(rentedRoom.rent);
             setIsCouponApplied(false);
         }
     };
@@ -58,10 +70,10 @@ const MakePayment = () => {
 
         const paymentData = {
             email: users?.email,
-            floor: agreementInfo.floor,
-            block: agreementInfo.block,
-            apartment: agreementInfo.apartment,
-            originalRent: agreementInfo.rent,
+            floor: rentedRoom.floor,
+            block: rentedRoom.block,
+            apartment: rentedRoom.apartment,
+            originalRent: rentedRoom.rent,
             finalAmount: finalRent,
             couponCode: isCouponApplied ? couponCode : null,
             month,
@@ -71,6 +83,10 @@ const MakePayment = () => {
         toast.success("Redirecting to payment...");
         navigate("/dashboard/payment-success", { state: paymentData });
     };
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <motion.div
@@ -100,11 +116,11 @@ const MakePayment = () => {
                 className="relative z-10 bg-white/70 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto space-y-6 text-gray-800"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input label="Email" value={agreementInfo.email} />
-                    <Input label="Floor" value={agreementInfo.floor} />
-                    <Input label="Block" value={agreementInfo.block} />
-                    <Input label="Apartment No" value={agreementInfo.apartment} />
-                    <Input label="Rent (৳)" value={agreementInfo.rent + "৳"} />
+                    <Input label="Email" value={rentedRoom.email} />
+                    <Input label="Floor" value={rentedRoom.floor_no} />
+                    <Input label="Block" value={rentedRoom.block_name} />
+                    <Input label="Apartment No" value={rentedRoom.apartment_no} />
+                    <Input label="Rent (৳)" value={rentedRoom.rent + "৳"} />
                     <div>
                         <label className="label font-semibold">Select Month</label>
                         <select

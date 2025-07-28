@@ -11,7 +11,7 @@ const CouponSection = () => {
     }, []);
 
     return (
-        <section className="bg-gradient-to-br from-purple-100 via-white to-purple-50 py-16 px-6 md:px-20">
+        <section className=" py-16 px-6 md:px-20">
             <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-4xl font-extrabold text-purple-700 mb-4 flex justify-center items-center gap-2">
                     <FaTags className="text-purple-500" />
