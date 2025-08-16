@@ -32,8 +32,10 @@ const Nav = () => {
             <NavbarCollapse>
                 <NavLink className="text-lg" to={'/'}>Home</NavLink>
                 <NavLink className="text-lg" to={'/apartment'}>Apartment</NavLink>
-                <NavLink className="text-lg" to={'/terms-and-conditions'}>Terms</NavLink>
+                <NavLink className="text-lg" to={'/contact-us'}>Contact Us</NavLink>
                 <NavLink className="text-lg" to={'/about-us'}>About Us</NavLink>
+                <NavLink className="text-lg" to={'/privacy-policy'}>Privacy Policy</NavLink>
+                <NavLink className="text-lg" to={'/faqs'}>FAQs</NavLink>
 
                 { 
                     users ? <Dropdown label={

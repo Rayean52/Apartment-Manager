@@ -21,6 +21,9 @@ import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 import TermsAndConditions from "../../components/Shared/TermsAndConditions";
 import AboutUs from "../../components/Shared/AboutUs";
+import ContactUs from "../../components/Shared/ContactUs";
+import PrivacyPolicy from "../../components/Shared/PrivacyPolicy";
+import FAQs from "../../components/Shared/FAQs";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +47,18 @@ const router = createBrowserRouter([
             {
                 path: 'about-us',
                 Component: AboutUs
+            },
+            {
+                path: 'contact-us',
+                Component: ContactUs
+            },
+            {
+                path: 'privacy-policy',
+                Component: PrivacyPolicy
+            },
+            {
+                path: 'faqs',
+                Component: FAQs
             }
         ]
     },

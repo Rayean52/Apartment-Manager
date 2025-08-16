@@ -5,7 +5,7 @@ export default function TermsAndConditions() {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             {/* Header */}
-            <header className="bg-white shadow-md sticky top-0 z-50">
+            {/* <header className="bg-white shadow-md sticky top-0 z-50">
                 <div className="container mx-auto flex items-center justify-between px-6 py-4">
                     <h1 className="text-2xl font-bold text-gray-800">Apartment Management</h1>
                     <Link to="/">
@@ -14,7 +14,7 @@ export default function TermsAndConditions() {
                         </button>
                     </Link>
                 </div>
-            </header>
+            </header> */}
 
             {/* Main Content */}
             <main className="flex-grow container mx-auto px-6 py-10">
