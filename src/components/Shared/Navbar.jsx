@@ -32,8 +32,10 @@ const Nav = () => {
             <NavbarCollapse>
                 <NavLink className="text-lg" to={'/'}>Home</NavLink>
                 <NavLink className="text-lg" to={'/apartment'}>Apartment</NavLink>
+                <NavLink className="text-lg" to={'/terms-and-conditions'}>Terms</NavLink>
+                <NavLink className="text-lg" to={'/about-us'}>About Us</NavLink>
 
-                {
+                { 
                     users ? <Dropdown label={
                         <Avatar img={users.photoURL} rounded status="online" />
                     } dismissOnClick={false}>

@@ -19,6 +19,8 @@ import MemberProfile from "../../Layouts/DashboardLayout/DasgPages/MemberPage/Me
 import PaymentSuccess from "../../Layouts/DashboardLayout/DasgPages/MemberPage/PaymentSuccess";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
+import TermsAndConditions from "../../components/Shared/TermsAndConditions";
+import AboutUs from "../../components/Shared/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
                 path: 'apartment',
                 loader: () => fetch('https://apartment-manager-kappa.vercel.app/apartments'),
                 Component: Apartment
+            },
+            {
+                path: 'terms-and-conditions',
+                Component: TermsAndConditions
+            },
+            {
+                path: 'about-us',
+                Component: AboutUs
             }
         ]
     },
