@@ -155,16 +155,36 @@ const Apartment = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="mt-12 flex flex-wrap justify-center space-x-2 gap-y-2">
+                    <div className="mt-12 flex flex-wrap justify-center items-center space-x-2 gap-y-2">
+                        {/* Previous Button */}
+                        <button
+                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                            className="btn btn-sm btn-outline"
+                        >
+                            ⬅ Prev
+                        </button>
+
+                        {/* Page Numbers */}
                         {Array.from({ length: totalPages }, (_, i) => (
                             <button
                                 key={i}
                                 onClick={() => setCurrentPage(i + 1)}
-                                className={`btn btn-sm ${currentPage === i + 1 ? "btn-primary" : "btn-outline"}`}
+                                className={`btn btn-sm ${currentPage === i + 1 ? "btn-primary" : "btn-outline"
+                                    }`}
                             >
                                 {i + 1}
                             </button>
                         ))}
+
+                        {/* Next Button */}
+                        <button
+                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                            className="btn btn-sm btn-outline"
+                        >
+                            Next ➡
+                        </button>
                     </div>
                 )}
             </motion.div>
