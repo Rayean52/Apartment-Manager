@@ -3,7 +3,7 @@ import { Mail } from "lucide-react"; // nice mail icon
 
 export default function Newsletter() {
     return (
-        <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16 px-6">
+        <section className="bg-[radial-gradient(circle_at_10%_20%,rgba(129,230,217,0.15)_0%,transparent_40%) py-16 px-6">
             <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
                 {/* Left Side */}
                 <motion.div

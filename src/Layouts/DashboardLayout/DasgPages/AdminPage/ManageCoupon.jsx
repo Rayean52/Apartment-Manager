@@ -50,7 +50,7 @@ const ManageCoupons = () => {
             toast.error("Server error.");
         }
 
-        setFormData({ code: "", discount: "", description: "" });
+        setFormData({ code: "", discount: "", description: "", image: "", id: "", title: "" });
         setIsOpen(false);
     };
 
@@ -115,15 +115,49 @@ const ManageCoupons = () => {
 
                         <div className="space-y-3">
                             <div>
+                                <label className="block text-sm font-medium text-gray-700">Coupon ID</label>
+                                <input
+                                    type="text"
+                                    name="id"
+                                    value={formData.id}
+                                    onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Title</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Image URL</label>
+                                <input
+                                    type="text"
+                                    name="image"
+                                    value={formData.image}
+                                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                />
+                            </div>
+
+                            <div>
                                 <label className="block text-sm font-medium text-gray-700">Coupon Code</label>
                                 <input
                                     type="text"
                                     name="code"
                                     value={formData.code}
                                     onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                 />
                             </div>
+
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Discount %</label>
                                 <input
@@ -131,9 +165,10 @@ const ManageCoupons = () => {
                                     name="discount"
                                     value={formData.discount}
                                     onChange={(e) => setFormData({ ...formData, discount: e.target.value })}
-                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                 />
                             </div>
+
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Description</label>
                                 <textarea
@@ -141,9 +176,10 @@ const ManageCoupons = () => {
                                     rows="3"
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                                    className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                 />
                             </div>
+
                             <button
                                 onClick={handleAddCoupon}
                                 className="w-full mt-3 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"

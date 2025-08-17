@@ -26,36 +26,12 @@ const features = [
         description:
             "Modern, fast, and secure elevators ensure smooth vertical movement throughout the building.",
         img: "https://cdn-icons-png.flaticon.com/512/846/846264.png",
-    },
-    {
-        title: "50+ Modern Apartments",
-        description:
-            "Spacious, sunlit units with premium amenities designed for comfort and functionality.",
-        img: "https://cdn-icons-png.flaticon.com/512/3176/3176297.png",
-    },
-    {
-        title: "Private Playground",
-        description:
-            "A secure, fun, and clean play area where children can enjoy quality time safely.",
-        img: "https://cdn-icons-png.flaticon.com/512/168/168177.png",
-    },
-    {
-        title: "24/7 Security System",
-        description:
-            "Monitored entrances, smart surveillance, and secure access for complete peace of mind.",
-        img: "https://cdn-icons-png.flaticon.com/512/3064/3064197.png",
-    },
-    {
-        title: "Community Announcements",
-        description:
-            "Stay informed with notices, events, and member alerts through the internal dashboard.",
-        img: "https://cdn-icons-png.flaticon.com/512/3138/3138755.png",
-    },
+    }
 ];
 
 const AboutBuilding = () => {
     return (
-        <section className="bg-[radial-gradient(circle_at_10%_20%,rgba(129,230,217,0.15)_0%,transparent_40%)] py-24 px-6 md:px-12 lg:px-20">
+        <section className="py-24 px-6 md:px-12 lg:px-20">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

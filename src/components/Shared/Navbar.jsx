@@ -102,16 +102,6 @@ const Nav = () => {
                 </NavLink>
 
                 <NavLink
-                    to="/privacy-policy"
-                    className={({ isActive }) =>
-                        `flex items-center gap-2 text-lg ${isActive ? "text-white font-semibold" : "text-gray-300"
-                        } hover:text-white`
-                    }
-                >
-                    <ShieldCheck size={20} /> Privacy Policy
-                </NavLink>
-
-                <NavLink
                     to="/faqs"
                     className={({ isActive }) =>
                         `flex items-center gap-2 text-lg ${isActive ? "text-white font-semibold" : "text-gray-300"
