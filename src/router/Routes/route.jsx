@@ -24,6 +24,7 @@ import AboutUs from "../../components/Shared/AboutUs";
 import ContactUs from "../../components/Shared/ContactUs";
 import PrivacyPolicy from "../../components/Shared/PrivacyPolicy";
 import FAQs from "../../components/Shared/FAQs";
+import ApartmentDetails from "../../pages/Apartment/ApartmentDetails";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
                 path: 'apartment',
                 loader: () => fetch('https://apartment-manager-kappa.vercel.app/apartments'),
                 Component: Apartment
+            },
+            {
+                path: 'apartment-details/:id',
+                Component: ApartmentDetails
             },
             {
                 path: 'terms-and-conditions',
