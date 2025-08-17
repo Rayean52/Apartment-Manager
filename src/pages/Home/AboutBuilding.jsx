@@ -40,7 +40,7 @@ const AboutBuilding = () => {
                 className="max-w-7xl mx-auto text-center"
             >
                 {/* Gradient Title */}
-                <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
                     About the Building
                 </h2>
 

@@ -44,7 +44,7 @@ const Nav = () => {
         <Navbar
             fluid
             rounded
-            className="fixed top-0 left-0 w-full z-50 bg-gray-900 border-b border-gray-700 shadow-lg"
+            className="fixed top-0 px-6 md:px-12 lg:px-20 left-0 w-full z-50 bg-gray-900 border-b border-gray-700 shadow-lg"
         >
             {/* Brand */}
             <NavbarBrand>

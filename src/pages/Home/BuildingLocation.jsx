@@ -21,7 +21,7 @@ const ApartmentLocation = () => {
     };
 
     return (
-        <section className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-br from-[#f4f7fa] via-[#f7faff] to-[#ffffff]">
+        <section className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
             {/* Gradient animation background */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_20%,rgba(129,230,217,0.15)_0%,transparent_40%)] pointer-events-none z-0"></div>
 
@@ -35,7 +35,7 @@ const ApartmentLocation = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* LEFT: Title & Description */}
                     <div className="text-center lg:text-left">
-                        <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 bg-clip-text text-transparent mb-4">
+                        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
                             Apartment Location
                         </h2>
                         <p className="text-lg md:text-xl text-gray-700 mb-6 font-light max-w-xl">
@@ -53,7 +53,7 @@ const ApartmentLocation = () => {
                         {/* Google Maps Button */}
                         <button
                             onClick={openInGoogleMaps}
-                            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:scale-105 transition-all"
+                            className="btn btn-primary px-6 py-3 rounded-lg shadow-lg hover:scale-105 transition-all"
                         >
                             Open in Google Maps
                         </button>

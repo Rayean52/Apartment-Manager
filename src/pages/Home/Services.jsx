@@ -36,7 +36,7 @@ export default function Services() {
     ];
 
     return (
-        <section className="bg-gray-50 py-16 px-6">
+        <section className="bg-gray-50 py-16  px-6 md:px-12 lg:px-20">
             <div className="max-w-6xl mx-auto text-center mb-12">
                 <motion.h2
                     initial={{ opacity: 0, y: -20 }}
@@ -52,7 +52,7 @@ export default function Services() {
                 </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 w-9/12 gap-8 mx-auto">
                 {services.map((service, index) => (
                     <motion.div
                         key={index}

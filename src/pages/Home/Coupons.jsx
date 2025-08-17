@@ -44,7 +44,7 @@ const CouponSection = () => {
     }
 
     return (
-        <section className="py-16 px-6 md:px-20 bg-[radial-gradient(circle_at_10%_20%,rgba(129,230,217,0.15)_0%,transparent_40%)] ">
+        <section className="py-16 px-6 md:px-20 lg:px-20 bg-[radial-gradient(circle_at_10%_20%,rgba(129,230,217,0.15)_0%,transparent_40%)] ">
             <div className="max-w-7xl mx-auto">
                 {/* Section Title */}
                 <div className="text-left mb-12">
